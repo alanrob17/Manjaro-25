@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Installation.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="manjaro-installation">Manjaro Installation</h1>
+<h2 id="install-firewall">Install firewall</h2>
+<pre class="hljs"><code><div>    sudo systemctl <span class="hljs-built_in">enable</span> ufw.service
+</div></code></pre>
+<p>Enable firewall.</p>
+<pre class="hljs"><code><div>    sudo ufw <span class="hljs-built_in">enable</span>
+</div></code></pre>
+<p>This enables the Firewall with the default options. To check those options.</p>
+<pre class="hljs"><code><div>    sudo ufw status verbose
+</div></code></pre>
+<h2 id="localbin">.local/bin</h2>
+<p>Make sure ``$HOME/.local/bin` exists.</p>
+<h2 id="installing-scripts">Installing scripts</h2>
+<p>Copy the <code>shell_funcs.sh</code> and <code>wipe</code> scripts to the <code>~/.local/bin</code> folder.</p>
+<p>Set the execute permissions.</p>
+<pre class="hljs"><code><div>    chmod 774 ~/.<span class="hljs-built_in">local</span>/bin/shell_funcs.sh
+    chmod 774 ~/.<span class="hljs-built_in">local</span>/bin/wipe
+</div></code></pre>
+<p>Run this command to run the <code>shell_funcs.sh</code> script.</p>
+<pre class="hljs"><code><div>    <span class="hljs-built_in">echo</span> <span class="hljs-string">'source ~/.local/bin/shell_funcs.sh'</span> &gt;&gt; ~/.zshrc
+</div></code></pre>
+<p>This adds.</p>
+<blockquote>
+<p>source ~/.local/bin/shell_funcs.sh</p>
+</blockquote>
+<p>to the <code>.zshrc</code> file.</p>
+<p><strong>Note:</strong> I couldn't get this script file working in Manjaro. To get around this you have to insert the script functions into your current shell. Source does that.</p>
+<h2 id="install-cargo">Install Cargo</h2>
+<p>Using Rustup (Recommended)</p>
+<p>This method is preferred for developers who want to manage multiple toolchains or stay on the latest version.</p>
+<p>Install/Update via curl:</p>
+<pre class="hljs"><code><div>    curl --proto <span class="hljs-string">'=https'</span> --tlsv1.2 -sSf https://sh.rustup.rs | sh
+</div></code></pre>
+<p>Activate the environment:</p>
+<pre class="hljs"><code><div>    <span class="hljs-built_in">source</span> <span class="hljs-string">"<span class="hljs-variable">$HOME</span>/.cargo/env"</span>
+</div></code></pre>
+<p>Verify installation:</p>
+<pre class="hljs"><code><div>    cargo --version
+</div></code></pre>
+<h3 id="issue">Issue</h3>
+<p>I want to install <code>eza</code> and I got error messages. I fixed these with the following commands.</p>
+<p>Ensure your system is fully updated.</p>
+<pre class="hljs"><code><div>    sudo pacman -Syu
+</div></code></pre>
+<p>Install essential build tools, including a C compiler and <code>pkg-config</code>.</p>
+<pre class="hljs"><code><div>    sudo pacman -S base-devel pkg-config
+</div></code></pre>
+<p>Update the Rust Toolchain.</p>
+<pre class="hljs"><code><div>    rustup update
+</div></code></pre>
+<p>Clean and Rebuild.</p>
+<pre class="hljs"><code><div>    cargo clean
+</div></code></pre>
+<p>Now you are ready to install Rust applications.</p>
+<h2 id="install-eza">Install eza</h2>
+<p>eza is a coloured replacement for <code>ls</code>. It seems to have all of the options that <code>ls</code> has plus a lot of extras. Once again this works on a Windows PC.</p>
+<p>Documentation.</p>
+<p>The <a href="https://github.com/eza-community/eza">Eza community Github site</a>.</p>
+<h3 id="installation">Installation</h3>
+<pre class="hljs"><code><div>    cargo install eza --locked
+</div></code></pre>
+<p>Add to <code>$PATH</code> if not already (it should be automatically).</p>
+<pre class="hljs"><code><div>    <span class="hljs-built_in">which</span> eza
+</div></code></pre>
+<h2 id="install-xcp">Install xcp</h2>
+<p><code>xcp</code> is a modern version of the <code>cp</code> copy command. It is a lot more user friendly than <code>cp</code>.</p>
+<p>Installing <code>xcp</code> on Manjaro is done through Cargo, Rust's package manager.</p>
+<p>You can install xcp with.</p>
+<pre class="hljs"><code><div>	cargo install xcp
+</div></code></pre>
+<p>Installation Directory: The binary is typically installed in <code>~/.cargo/bin/</code>. Make sure this directory is in your shell's $PATH (the Rust installer usually sets this up automatically).</p>
+<h2 id="install-docker">Install Docker</h2>
+<p>To install Docker on Manjaro 25, you primarily use the <code>pacman</code> package manager through the terminal. The process involves updating your system, installing the Docker package, and then starting and enabling the Docker service.</p>
+<h3 id="installation-steps">Installation Steps</h3>
+<p>Update your system packages.</p>
+<pre class="hljs"><code><div>   sudo pacman -Syu
+</div></code></pre>
+<p>Install the docker package from the official Manjaro repositories.</p>
+<pre class="hljs"><code><div>    sudo pacman -S docker
+</div></code></pre>
+<p>Start and enable the Docker service by starting the Docker daemon and enable it to run automatically on system boot.</p>
+<p>Start the service immediately.</p>
+<pre class="hljs"><code><div>    sudo systemctl start docker.service
+</div></code></pre>
+<p>Enable the service to start on boot.</p>
+<pre class="hljs"><code><div>    sudo systemctl <span class="hljs-built_in">enable</span> docker.service
+</div></code></pre>
+<p>Verify the installation. Check if Docker is running correctly by checking its status.</p>
+<pre class="hljs"><code><div>    sudo systemctl status docker.service
+</div></code></pre>
+<p>Run a test container (e.g., hello-world).</p>
+<pre class="hljs"><code><div>    sudo docker run hello-world
+</div></code></pre>
+<p>Apply the new group membership. For the changes to take effect, you must either log out and log back in, or restart your system.</p>
+<p>Alternatively, you can apply the changes to your current terminal session immediately using the newgrp command.</p>
+<pre class="hljs"><code><div>    newgrp docker
+</div></code></pre>
+<p>Verify the fix.</p>
+<p>After logging back in or running <code>newgrp docker</code>, you can verify that your user is in the docker group by running the <code>groups</code> command.</p>
+<pre class="hljs"><code><div>    groups
+</div></code></pre>
+<h3 id="manage-docker-as-a-non-root-user">Manage Docker as a non-root user</h3>
+<p>By default, you must use <code>sudo</code> to run Docker commands. To run Docker without <code>sudo</code>, you need to add your user account to the docker group.</p>
+<pre class="hljs"><code><div>    sudo usermod -aG docker <span class="hljs-variable">$USER</span>
+</div></code></pre>
+<p>For this change to take effect, you may need to log out and log back in (or restart your system).</p>
+<p>After logging back in, you can verify by running the test container without <code>sudo</code>.</p>
+<pre class="hljs"><code><div>    docker run hello-world
+</div></code></pre>
+<h3 id="installing-docker-compose">Installing Docker Compose</h3>
+<p>Docker Compose is a tool for defining and running multi-container Docker applications. It is often installed as a plugin alongside Docker Engine.</p>
+<p>To install the Docker Compose plugin via pacman.</p>
+<pre class="hljs"><code><div>    sudo pacman -S docker-compose
+</div></code></pre>
+<p>Test Docker-Compose is installed.</p>
+<pre class="hljs"><code><div>    docker compose version
+</div></code></pre>
+
+</body>
+</html>
