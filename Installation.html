@@ -375,6 +375,12 @@ code {
 <p>This enables the Firewall with the default options. To check those options.</p>
 <pre class="hljs"><code><div>    sudo ufw status verbose
 </div></code></pre>
+<h2 id="using-pamac">Using pamac</h2>
+<p><code>pamac</code> is the Pamac Graphical Interface (&quot;Add/Remove Software&quot;).</p>
+<p>There are a number of software packages that you can use by enabling the AUR:</p>
+<p>Open the Add/Remove Software application (Pamac) from your application menu.</p>
+<p>Click the three-dot menu icon (☰) in the upper right corner and select Preferences.</p>
+<p>Go to the AUR tab and toggle the switch to Enable AUR support.</p>
 <h2 id="localbin">.local/bin</h2>
 <p>Make sure ``$HOME/.local/bin` exists.</p>
 <h2 id="installing-scripts">Installing scripts</h2>
@@ -481,6 +487,217 @@ code {
 </div></code></pre>
 <p>Test Docker-Compose is installed.</p>
 <pre class="hljs"><code><div>    docker compose version
+</div></code></pre>
+<h2 id="install-visual-studio-code">Install Visual Studio Code</h2>
+<p>You can use the command line interface of Pamac to install the visual-studio-code-bin package from the AUR.</p>
+<p>Update your system packages.</p>
+<pre class="hljs"><code><div>   sudo pacman -Syu
+</div></code></pre>
+<p>Install:</p>
+<pre class="hljs"><code><div>    pamac build visual-studio-code-bin
+</div></code></pre>
+<p>Synchronise:</p>
+<blockquote>
+<p>Github account: alanrob17</p>
+</blockquote>
+<h2 id="install-unrar">Install unrar</h2>
+<p>Update your system packages.</p>
+<pre class="hljs"><code><div>   sudo pacman -Syu
+</div></code></pre>
+<p>Install:</p>
+<pre class="hljs"><code><div>    sudo pacman -S unrar
+</div></code></pre>
+<p><strong>Note:</strong> it doesn't look like you can install <code>rar</code>. <code>7zip</code> is installed on Manjaro.</p>
+<h2 id="install-net-core">Install .Net Core</h2>
+<pre class="hljs"><code><div>    sudo pacman -S dotnet-sdk aspnet-runtime
+</div></code></pre>
+<p>The <code>aspnet-runtime</code> is optional but recommended if you plan to work with web applications.</p>
+<p>Create an environment variable file so your system can locate the dotnet installation.</p>
+<p>Open a new file /etc/profile.d/dotnet.sh using a text editor (e.g., nano or vim) with superuser privileges:</p>
+<pre class="hljs"><code><div>    sudo nano /etc/profile.d/dotnet.sh
+</div></code></pre>
+<p>Add the following lines to the file:</p>
+<pre class="hljs"><code><div><span class="hljs-built_in">export</span> DOTNET_ROOT=/usr/share/dotnet
+<span class="hljs-built_in">export</span> MSBuildSDKsPath=<span class="hljs-variable">$DOTNET_ROOT</span>/sdk/$(<span class="hljs-variable">${DOTNET_ROOT}</span>/dotnet --version)/Sdks
+<span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">${PATH}</span>:<span class="hljs-variable">${DOTNET_ROOT}</span>
+</div></code></pre>
+<p>Reboot your system or re-login for the environment variables to take effect.</p>
+<p>Verify the installation by checking the installed SDKs:</p>
+<pre class="hljs"><code><div>    dotnet --list-sdks
+</div></code></pre>
+<h3 id="extra-setup">Extra setup</h3>
+<p>Installed an ASP.NET Core HTTPS development certificate.</p>
+<p>To trust the certificate:</p>
+<pre class="hljs"><code><div>    dotnet dev-certs https --trust
+</div></code></pre>
+<p><strong>Note:</strong> Trusting the HTTPS development certificate was requested. Trust is per-user and may require additional configuration. See https://aka.ms/dev-certs-trust for more information.</p>
+<p>Verifying workloads:</p>
+<pre class="hljs"><code><div>    sudo dotnet workload update
+</div></code></pre>
+<h2 id="install-snap">Install snap</h2>
+<p>Install snapd:</p>
+<pre class="hljs"><code><div>    sudo pacman -S snapd
+</div></code></pre>
+<p>Enable Snap: Enable the socket and link it:</p>
+<pre class="hljs"><code><div>    sudo systemctl <span class="hljs-built_in">enable</span> --now snapd.socket
+    sudo ln -s /var/lib/snapd/snap /snap
+</div></code></pre>
+<p><strong>Note:</strong> after this is done you need to reboot.</p>
+<p>Check your path and make sure this is included:</p>
+<pre class="hljs"><code><div>    /var/lib/snapd/snap/bin 
+</div></code></pre>
+<h2 id="install-nordvpn">Install NordVPN</h2>
+<p>I can only use NordVPN as a snap package.</p>
+<pre class="hljs"><code><div>    sudo snap install nordvpn
+</div></code></pre>
+<p>Configure Permissions: Add your user to the nordvpn group to avoid permission errors:</p>
+<pre class="hljs"><code><div>    sudo usermod -aG nordvpn <span class="hljs-variable">$USER</span>
+</div></code></pre>
+<p><strong>Note:</strong> Restart your computer to apply group changes.</p>
+<p>As we are using snap we have to run some more settings:</p>
+<pre class="hljs"><code><div>sudo snap connect nordvpn:system-observe
+sudo snap connect nordvpn:hardware-observe
+sudo snap connect nordvpn:network-control
+sudo snap connect nordvpn:network-observe
+sudo snap connect nordvpn:firewall-control
+sudo snap connect nordvpn:login-session-observe
+</div></code></pre>
+<p>Reboot again.</p>
+<h3 id="login-to-nordvpn">Login to NordVPN</h3>
+<p>You have to create a token on the NordVPN website:</p>
+<pre class="hljs"><code><div>nordvpn login --token e9f2ab396bdec347ee8e839bb37085f39708b31797c6d9129f99e7ad4f36cd24
+</div></code></pre>
+<p>Now you can connect:</p>
+<pre class="hljs"><code><div>    nordvpn connect Australia Sydney
+</div></code></pre>
+<h2 id="install-chrome-browser">Install Chrome browser</h2>
+<pre class="hljs"><code><div>    sudo pamac build google-chrome
+</div></code></pre>
+<h2 id="install-brave-browser">Install Brave browser</h2>
+<pre class="hljs"><code><div>    sudo pamac install brave-browser
+</div></code></pre>
+<h2 id="install-vnstat">Install vnstat</h2>
+<pre class="hljs"><code><div>    sudo pacman -Syu vnstat
+</div></code></pre>
+<p>Enable and Start the vnStat Daemon:</p>
+<p><code>vnstat</code> runs as a background service (daemon) to collect data. You must enable it to start automatically on boot and start it immediately:</p>
+<pre class="hljs"><code><div>    sudo systemctl <span class="hljs-built_in">enable</span> --now vnstat
+</div></code></pre>
+<p>Verify the Installation:</p>
+<p>Check that the daemon is running correctly:</p>
+<pre class="hljs"><code><div>    sudo systemctl status vnstat
+</div></code></pre>
+<h2 id="installing-rust-utilities">Installing Rust utilities</h2>
+<p>There are a number of Rust utilities that can be used in Linux or Windows. I will install and document these applications.</p>
+<p>These are documented at Github - <a href="https://github.com/ibraheemdev/modern-unix">Modern Unix utilities</a>.</p>
+<h3 id="bat">Bat</h3>
+<p><code>BatCat</code> is a replacement for <code>Cat</code> with an impressive coloured output.</p>
+<p>Installation:</p>
+<p>Use pamac to install <code>BatCat</code>.</p>
+<h4 id="create-an-alias">Create an alias</h4>
+<p>We can create aliases and add it to .zsh_aliases.</p>
+<pre class="hljs"><code><div>    <span class="hljs-built_in">alias</span> bc=<span class="hljs-string">'batcat'</span>
+    <span class="hljs-built_in">alias</span> cat=<span class="hljs-string">'batcat'</span>
+</div></code></pre>
+<h3 id="fd">fd</h3>
+<p>The <code>fd</code> command is a file system utility, serving as a modern, faster, and more user-friendly alternative to the traditional <code>find</code> command in Linux. It offers a simpler syntax and sensible defaults for common use cases.</p>
+<p>Installation</p>
+<pre class="hljs"><code><div>    sudo pacman -S fd
+</div></code></pre>
+<h4 id="usage">Usage</h4>
+<pre class="hljs"><code><div>    fd PATTERN
+</div></code></pre>
+<p><code>fd</code> is supposedly case insensitive. I have to use <code>-i</code> to force it to be case insensitive.</p>
+<pre class="hljs"><code><div>    fd wipe
+</div></code></pre>
+<p>Returns.</p>
+<blockquote>
+<p>Documents/Linux-Mint-22/wipe<br>
+Documents/Manjaro-25/wipe<br>
+Downloads/wipe</p>
+</blockquote>
+<p>Search in a specific directory.</p>
+<pre class="hljs"><code><div>    fd bypass-brave.txt Documents/
+</div></code></pre>
+<p>Note: you can use <code>-i</code> for case insensitive searches.</p>
+<p>Searching for multiple files with the same extension.</p>
+<pre class="hljs"><code><div>    fd -g <span class="hljs-string">'*.epub'</span>
+</div></code></pre>
+<p>Returns.</p>
+<blockquote>
+<p>Documents/Linux-Mint-22/Dot-Net-in-Linux.md<br>
+Documents/Linux-Mint-22/Software-for-Linux-Mint-22.md<br>
+...<br>
+Downloads/asp/bypass-paywalls-chrome-clean-master/README.md<br>
+Downloads/asp/bypass-paywalls-chrome-clean-master/allowlist/README.md</p>
+</blockquote>
+<p><strong>Note:</strong> <code>-g</code> is for file globbing and this allows you to do wildcard searches. You have to enclose the extension in quotes.</p>
+<p>Only search 2 directories deep:</p>
+<pre class="hljs"><code><div>    fd -gd3 <span class="hljs-string">'*.md'</span>
+</div></code></pre>
+<p>Returns.</p>
+<blockquote>
+<p>Documents/Linux-Mint-22/Dot-Net-in-Linux.md<br>
+Documents/Linux-Mint-22/Software-for-Linux-Mint-22.md<br>
+...</p>
+</blockquote>
+<p>Search for files with an extension:</p>
+<pre class="hljs"><code><div>    fd -e sh
+</div></code></pre>
+<p>Returns.</p>
+<blockquote>
+<p>Documents/Linux-Mint-22/colours.sh<br>
+Documents/Linux-Mint-22/gc.sh<br>
+Documents/Linux-Mint-22/shell_funcs.sh<br>
+Downloads/shell_funcs.sh</p>
+</blockquote>
+<p>To list all files in a specific directory, use the wild card symbol <code>.</code> as the search pattern:</p>
+<pre class="hljs"><code><div>    fd . Documents/
+</div></code></pre>
+<p>Returns everything in the Documents directory.</p>
+<p>There are a huge number options with the <code>fd</code> command.</p>
+<h3 id="tldr">tldr</h3>
+<p>The Linux <code>tldr</code> (Too Long; Didn't Read) application is a command-line tool providing simplified, community-driven cheat sheets for common Linux/Unix commands, acting as an easy-to-read alternative to lengthy man pages by focusing on practical examples. It helps users quickly understand commands like <code>ls</code> or <code>tar</code> with concise, ready-to-use examples, making it great for beginners and experienced users who need a fast reminder.</p>
+<p>Installation:</p>
+<pre class="hljs"><code><div>    sudo pacman -S tldr
+</div></code></pre>
+<p>Once you have installed <code>tldr</code> you need to update the local cache of tldr pages:</p>
+<pre class="hljs"><code><div>    tldr -u|--update
+</div></code></pre>
+<h4 id="usage">Usage</h4>
+<p>Print the <code>tldr</code> page for a specific command:</p>
+<pre class="hljs"><code><div>   tldr <span class="hljs-built_in">command</span>
+</div></code></pre>
+<p>Print the tldr page for a specific subcommand:</p>
+<pre class="hljs"><code><div>   tldr <span class="hljs-built_in">command</span> subcommand
+</div></code></pre>
+<p>Print the tldr page for a command from a specific platform:</p>
+<pre class="hljs"><code><div>   tldr [-p|--platform] android|cisco-ios|common|dos|freebsd|linux|netbsd|openbsd|osx|sunos|windows <span class="hljs-built_in">command</span>
+</div></code></pre>
+<p>List all pages for the current platform and common:</p>
+<pre class="hljs"><code><div>   tldr -l|--list
+</div></code></pre>
+<h3 id="zoxide">zoxide</h3>
+<p><code>zoxide</code> is an alternative to the cd command, offering faster performance and smarter navigation capabilities. Like the tools mentioned below, much of the power of <code>zoxide</code> is in its directory ranking based on your usage. Its ranking algorithm can quickly match partial paths, even single search terms, with one of your most used directories.</p>
+<p>Installation:</p>
+<pre class="hljs"><code><div>    sudo pacman -S zoxide
+</div></code></pre>
+<p>Have your shell initialize zoxide with each shell session. You can do so by adding the following line to the end of your ~/.zshrc file.</p>
+<p>File: ~/.zshrc</p>
+<pre class="hljs"><code><div>	<span class="hljs-comment">#...</span>
+	<span class="hljs-built_in">eval</span> <span class="hljs-string">"<span class="hljs-variable">$(zoxide init zsh)</span>"</span>
+</div></code></pre>
+<h3 id="fzf">fzf</h3>
+<pre class="hljs"><code><div>    sudo pacman -S fzf
+</div></code></pre>
+<p><code>zsh</code> automatically installs the key bindings.</p>
+<h4 id="key-bindings">Key bindings</h4>
+<p>Once shell integration is set up, the following key bindings are available in your terminal.</p>
+<p><strong>Ctrl+T</strong>: Fuzzy find all files and subdirectories of the working directory and insert the selected items onto the command line.</p>
+<p><strong>Ctrl+R</strong>: Search through your shell command history using fuzzy matching. Pressing Ctrl+R again toggles sorting by relevance.</p>
+<p><strong>Alt+C</strong>: Fuzzy find all subdirectories and cd (change directory) into the selected one.</p>
+<p>Installing Fuzzy Finder in the <code>.zsh</code> shell:</p>
+<pre class="hljs"><code><div>    <span class="hljs-built_in">source</span> &lt;(fzf --zsh)
 </div></code></pre>
 
 </body>
