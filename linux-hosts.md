@@ -1,8 +1,7 @@
 # Linux hosts
 
 **TIGER** - Windows PC.
-
 **LYNX** - Manjaro - NUC
-**...** - Kubuntu - NUC
-**...** - Linux Mint - Samsung Ultra
-**...** - Linux Mint - Justin's PC
+**LION** - Kubuntu - NUC
+**CHEETAH** - Linux Mint - Samsung Ultra
+**PUMA** - Linux Mint - Justin's PC

@@ -41,8 +41,8 @@ Copy the ``shell_funcs.sh`` and ``wipe`` scripts to the ``~/.local/bin`` folder.
 Set the execute permissions.
 
 ```bash
-    chmod 774 ~/.local/bin/shell_funcs.sh
-    chmod 774 ~/.local/bin/wipe
+    chmod u+x ~/.local/bin/shell_funcs.sh
+    chmod u+x ~/.local/bin/wipe
 ```
 
 Run this command to run the ``shell_funcs.sh`` script.
@@ -618,4 +618,139 @@ Installing Fuzzy Finder in the ``.zsh`` shell:
 
 ```bash
     source <(fzf --zsh)
+```
+
+### Ripgrep
+
+```bash
+	sudo pacman -S ripgrep
+```
+
+#### Usage
+
+```bash
+    rg -i Linux
+```
+
+.
+
+```bash
+    rg -i Linux -g '*.md'
+```
+.
+
+```bash
+    rg Main -C 2 -t cs
+```
+
+.
+
+```bash
+    ls -R *.md | rg "README.md"
+```
+
+.
+
+```bash
+    rg text alan.txt
+```
+
+.
+
+```bash
+    rg -i Linux Documents/
+```
+
+.
+
+```bash
+    rg -i -d 2 '\bPartition\b' -g *.md
+```
+
+### Glow
+
+``glow`` is a Markdown file viewer.
+
+[Glow github page](https://github.com/charmbracelet/glow).
+
+Installation:
+
+```bash
+    sudo pacman -S glow
+```
+
+### Usage
+
+```bash
+    glow
+```
+
+This will give you a list of all markdown files in the directory and sub directories. Select one to view and you will be able to page through the markdown file.
+
+To select a single file.
+
+```bash
+    glow -p linux-files.md
+```
+
+``-p`` will add the paging system you are using.
+
+Word Wrapping:
+
+The -w flag lets you set a maximum width at which the output will be wrapped:
+
+```bash
+    glow -w 60
+```
+
+Themes:
+
+Glow also has themes:
+
+```bash
+    glow -p -s tokyo-night linux-notes.md
+```
+
+### Tokei
+
+``Tokei`` is a very powerful program that is used to display code statistics. This means it can count the total number of files, total lines within the files or code, can show comments, blanks etc and groups them according to language used.
+
+Features of Tokei:
+
+Tokei has a number of intuitive features that makes it a program to go for. These include:
+
+* Very Fast – Tokei can count millions of lines of codes within seconds.
+* Accuracy – Tokei is accurate in that it correctly handles both multi-line comments and nested comments and doesn’t comments that are in strings.
+* Multiple formats – It can give outputs in various formats such as JSON, YAML and CBOR, hence the output can be easily stored and reused.
+* Huge language range – It supports more that 150 languages with their extensions.
+* Support for Operating systems – Tokei is available on Mac, Windows and Linux Operating systems.
+* Tokei is a Library making it easy to be integrated with other projects.
+* Can be installed with and without color. The variable No_COLOR st to 1 makes it black and white.
+
+Installation:
+
+```bash
+    sudo pacman -S tokei
+```
+
+> alias tok='tokei'
+
+#### Usage
+
+```bash
+    tok ~/Documents/Linux-Mint-22
+```
+
+Will report on all files in the directory.
+
+To limit the type of files you want to count:
+
+```bash
+    tok ~/Documents/Linux-Mint-22 -t Markdown
+```
+
+To get statistics on a particular file:
+
+```bash
+tok -f ~/Documents/Linux-Mint-22/Software-for-Linux-Mint-22.md
 ```
